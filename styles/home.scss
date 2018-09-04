@@ -1,3 +1,46 @@
-h1 {
-  color: tomato;
+body{
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  background-color: #2196F3;
+  width: 100%;
+  margin: 0;
+  border-bottom: solid black thin;
+  height: 4em;
+  & h1 {
+    color: white;
+    padding: 0;
+    margin: 0;
+    padding: 10px 20px;
+  }
+}
+
+.chat {
+  margin: 5em 0 0 0;
+  padding: 0 0 0 10px;
+}
+
+.message {
+  position: fixed;
+  bottom: 0;
+  background-color: #71a6fc;
+  width: 100%;
+  border-top: solid black thin;
+  height: 4em;
+  padding: 0 0 0 10px;
+
+  & .name-input {
+    margin: 10px 5px;
+    padding: 10px 10px;
+  }
+
+  & .message-input {
+    margin: 10px 5px;
+    padding: 10px 10px;
+    width: 50em;
+  }
 }
