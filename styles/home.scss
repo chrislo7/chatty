@@ -1,46 +1,89 @@
-body{
-  margin: 0;
-  font-family: 'Roboto', sans-serif;
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700");
+
+@import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css");
+
+body {
+  background: white;
+  color: black;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  margin: 70px 0;
 }
 
-.navbar {
+.chatbar {
+  background: tomato;
+  border-top: 1px solid black;
+  bottom: 0;
+  display: flex;
+  left: 0;
+  padding: 5px;
   position: fixed;
-  top: 0;
-  background-color: #2196F3;
-  width: 100%;
-  margin: 0;
-  border-bottom: solid black thin;
-  height: 4em;
-  & h1 {
-    color: white;
-    padding: 0;
-    margin: 0;
-    padding: 10px 20px;
-  }
+  right: 0;
 }
 
-.chat {
-  margin: 5em 0 0 0;
-  padding: 0 0 0 10px;
+.chatbar-message,
+.chatbar-username {
+  border: 1px solid black;
+  display: block;
+  height: 40px;
+  line-height: 40px;
+  margin: 5px;
+  padding: 0 9px;
+}
+
+.chatbar-message {
+  flex: 8;
+}
+
+.chatbar-username {
+  flex: 2;
 }
 
 .message {
+  display: flex;
+  padding: 5px;
+}
+
+.message.system {
+  font-style: italic;
+  padding: 5px 20px;
+}
+
+.message-content,
+.message-username {
+  overflow: hidden;
+  margin: 5px;
+  padding: 0 10px;
+}
+
+.message-content {
+  flex: 8;
+}
+
+.message-username {
+  flex: 2;
+  font-weight: 700;
+}
+
+.navbar {
+  background: tomato;
+  border-bottom: 1px solid black;
+  height: 60px;
+  left: 0;
+  padding: 0 10px;
   position: fixed;
-  bottom: 0;
-  background-color: #71a6fc;
-  width: 100%;
-  border-top: solid black thin;
-  height: 4em;
-  padding: 0 0 0 10px;
+  right: 0;
+  top: 0;
+}
 
-  & .name-input {
-    margin: 10px 5px;
-    padding: 10px 10px;
-  }
-
-  & .message-input {
-    margin: 10px 5px;
-    padding: 10px 10px;
-    width: 50em;
-  }
+.navbar-brand {
+  color: inherit;
+  display: block;
+  float: left;
+  font-weight: 700;
+  font-size: 28px;
+  height: 60px;
+  line-height: 60px;
+  padding: 0 10px;
+  text-decoration: none;
 }
