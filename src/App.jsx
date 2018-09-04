@@ -19,30 +19,34 @@ const data = {
   ]
 }
 
+
+
 class App extends Component {
   //  Setting initial state so the component is initially "loading"
   // "loads" the data of current users into this.state
   constructor(props) {
     super(props);
-    this.state = { data, loading: true };
+    this.state = { currentUser : data.currentUser.name, messages: data.messages };
   }
 
   componentDidMount() {
-    //  After 3 seconds, set 'loading' to false in the state.
+    console.log("componentDidMount <App />");
     setTimeout(() => {
-      this.setState({ data, loading: false }); //re-rendering
-    }, 1000);
+      // Add a new message to the list of messages in the data store
+      const newMessage = {id: 3, username: "Sean", content: "I don't even eat lol"};
+      const messages = this.state.messages.concat(newMessage)
+      // Update the state of the app component.
+      // Calling setState will trigger a call to render() in App and all child components.
+      console.log('messages', messages)
+      this.setState({messages: messages})
+    }, 3000);
   }
+
 
   render() {
     console.log("Rendering App.jsx");
-    if (this.state.loading) {
-      console.log("Rendering loading text")
-      return <body>Loading...</body>
-    } else {
+    console.log('this', this)
       //assigns variable to grab current User object from state
-      let currentUser = this.state.data.currentUser;
-      let messageLog = this.state.data.messages;
       return (
         <body>
           <div className="navbar">
@@ -50,11 +54,10 @@ class App extends Component {
               Chatty
             </a>
           </div>
-          <MessageList messageLog={messageLog}/>
-          <ChatBar currentUser={currentUser.name} />
+          <MessageList messages={this.state.messages}/>
+          <ChatBar currentUser={this.state.currentUser}/>
         </body>
     )}
-  }
 }
 
 export default App;
