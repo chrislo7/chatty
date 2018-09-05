@@ -24,7 +24,10 @@ class App extends Component {
   // "loads" the data of current users into this.state
   constructor(props) {
     super(props);
-    this.state = { currentUser: data.currentUser.name, messages: data.messages };
+    this.state = {
+      currentUser: data.currentUser.name,
+      messages: data.messages
+    };
   }
 
   InsertMessage = (userMessage) => {
@@ -36,9 +39,26 @@ class App extends Component {
     this.setState( {messages: messagesWithUserMessage} )
   }
 
+  sendMessage = (message) => {
+    this.connection.send(JSON.stringify(message));
+    console.log('Message sent: Client => Server')
+  }
+
+  handleInsertMessage = (userMessage) => {
+    let messageLength = data.messages.length += 1;
+    const newMessage = {username: userMessage.username, content: userMessage.content};
+    const messagesWithUserMessage = this.state.messages.concat(newMessage);
+    this.setState( {messages: messagesWithUserMessage} )
+    this.sendMessage({message: messagesWithUserMessage})
+  }
+
   componentDidMount() {
     console.log("componentDidMount <App />");
-    setTimeout(() => {
+    this.connection = new WebSocket("ws://localhost:3001")
+    this.connection.onopen = (event) => {
+      console.log("Connection established");
+    }
+    /*setTimeout(() => {
       // Add a new message to the list of messages in the data store
       const newMessage = {id: 3, username: "Sean", content: "I don't even eat lol"};
       const messages = this.state.messages.concat(newMessage)
@@ -46,7 +66,8 @@ class App extends Component {
       // Calling setState will trigger a call to render() in App and all child components.
       console.log('messages in app.jsx', messages)
       this.setState({messages: messages})
-    }, 3000);
+    }, 3000);*/
+
   }
 
 
@@ -59,8 +80,8 @@ class App extends Component {
           <div className="navbar">
             <a href="/" className="navbar-brand">Chatty</a>
           </div>
-          <MessageList messages={this.state.messages}/>
-          <ChatBar currentUser={this.state.currentUser} InsertMessage={this.InsertMessage} />
+          <MessageList messages={this.state.messages} />
+          <ChatBar currentUser={this.state.currentUser} InsertMessage={this.handleInsertMessage} />
         </body>
     )}
 }
