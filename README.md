@@ -1,3 +1,32 @@
+Chatty App
+=====================
+### Please Read:
+
+Built with React Boilerplate, follow instructions below when installing.
+
+### Description
+
+Chatty is small app that allows multiple users to conenct and chat.
+
+### Instructions
+
+```
+When starting the app, you can optionally set username, it is 'anon' by default.
+When changing username, press ENTER on username field.
+When typing messages, press ENTER to send message.
+Enjoy!
+```
+
+### Screenshots
+
+![One user](https://github.com/chrislo7/chatty/blob/master/build/Single%20Window(1%20user).png)
+
+![Two users](https://github.com/chrislo7/chatty/blob/master/build/Two%20Windows(2%20users).png)
+
+![App](https://github.com/chrislo7/chatty/blob/master/build/Users.png)
+
+
+
 React Boilerplate
 =====================
 
