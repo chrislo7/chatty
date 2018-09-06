@@ -4,14 +4,16 @@ import Message from './Message.jsx';
 
 export default class MessageList extends Component {
   render() {
-    console.log("Rendering MessageList")
+    const createMessage = this.props.messages.map((logObject, index) => {
+      return <Message username={logObject.username} content={logObject.content} key={index} />
+    })
+    console.log(this.props.messages, "messagelist messgaes")
       //grabs the message log
-      //change key = index later @ displaying incoming messages
+      // change key = index later @ displaying incoming messages
+
     return (
       <main className="messages">
-      {this.props.messages.map((logObject, index) =>
-        <Message username={logObject.username} content={logObject.content} key={index} />
-      )}
+        {createMessage}
       </main>
     )
   }

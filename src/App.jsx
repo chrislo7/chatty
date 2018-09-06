@@ -5,16 +5,7 @@ import ChatBar from "./ChatBar.jsx";
 
 const data = {
   currentUser: { name: "" },
-  messages: [
-    {
-      username: "Vincent",
-      content: "I'm on keto so I can't eat carbs"
-    },
-    {
-      username: "Andrew",
-      content: "Keto sucks lol"
-    }
-  ]
+  messages: [] // messages coming from the server will be stored here as they arriv
 }
 
 
@@ -25,8 +16,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUser: data.currentUser.name,
-      messages: data.messages
+      currentUser: "",
+      messages: []
     };
   }
 
@@ -36,7 +27,6 @@ class App extends Component {
     let messageLength = data.messages.length += 1;
     const newMessage = {username: userMessage.username, content: userMessage.content};
     const messagesWithUserMessage = this.state.messages.concat(newMessage);
-    this.setState( {messages: messagesWithUserMessage} )
   }
 
   sendMessage = (message) => {
@@ -47,33 +37,27 @@ class App extends Component {
   handleInsertMessage = (userMessage) => {
     let messageLength = data.messages.length += 1;
     const newMessage = {username: userMessage.username, content: userMessage.content};
-    const messagesWithUserMessage = this.state.messages.concat(newMessage);
-    this.setState( {messages: messagesWithUserMessage} )
-    this.sendMessage({message: messagesWithUserMessage})
+    const messagesWithUserMessage = [... this.state.messages, (newMessage)];
+    this.sendMessage(newMessage)
   }
 
+
   componentDidMount() {
-    console.log("componentDidMount <App />");
     this.connection = new WebSocket("ws://localhost:3001")
     this.connection.onopen = (event) => {
       console.log("Connection established");
     }
-    /*setTimeout(() => {
-      // Add a new message to the list of messages in the data store
-      const newMessage = {id: 3, username: "Sean", content: "I don't even eat lol"};
-      const messages = this.state.messages.concat(newMessage)
-      // Update the state of the app component.
-      // Calling setState will trigger a call to render() in App and all child components.
-      console.log('messages in app.jsx', messages)
-      this.setState({messages: messages})
-    }, 3000);*/
 
+    this.connection.onmessage = (event) => {
+      const serverData = JSON.parse(event.data);
+      console.log('Data coming back from server to client', serverData);
+      this.setState(
+        { messages: [... this.state.messages, serverData] })
+    }
   }
 
 
   render() {
-    console.log("Rendering App.jsx");
-    console.log('this', this)
 
       return (
         <body>

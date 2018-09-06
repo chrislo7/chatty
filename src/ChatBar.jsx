@@ -28,8 +28,6 @@ export default class ChatBar extends Component {
   }
 
   render() {
-    console.log('this.props', this.props)
-    console.log('this.state in chatbar', this.state)
     return (
       <footer className="chatbar">
         <input className="chatbar-username" placeholder="Type a username" value={this.state.username} onChange={this.handleUserChange} onKeyPress={this.handleSubmit} />
