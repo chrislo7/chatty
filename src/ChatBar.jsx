@@ -30,7 +30,7 @@ export default class ChatBar extends Component {
     this.setState({content: event.target.value});
   }
   handleContentSubmit = (event) => {
-    if (event.key === "Enter") {
+    if (event.key === "Enter" && event.target.value) {
       this.props.InsertMessage(this.state)
       this.setState({content: ''})
     }
@@ -38,11 +38,10 @@ export default class ChatBar extends Component {
 
 
   render() {
-    console.log('this.props', this.props)
     return (
       <footer className="chatbar">
-        <input className="chatbar-username" placeholder="Type a username" value={this.state.username} onChange={this.handleUserChange} onKeyPress={this.handleUserSubmit} />
-        <input className="chatbar-message" placeholder="Type a message and hit ENTER" value={this.state.content} onChange={this.handleContentChange} onKeyPress={this.handleContentSubmit} />
+        <input className="chatbar-username" placeholder="Type a username & hit ENTER" value={this.state.username} onChange={this.handleUserChange} onKeyPress={this.handleUserSubmit} />
+        <input className="chatbar-message" placeholder="Type a message & hit ENTER" value={this.state.content} onChange={this.handleContentChange} onKeyPress={this.handleContentSubmit} />
       </footer>
     )
   }

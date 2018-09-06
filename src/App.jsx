@@ -55,6 +55,7 @@ class App extends Component {
     this.setState({currentUser: username})
   }
 
+
   componentDidMount() {
     this.connection = new WebSocket("ws://localhost:3001")
     this.connection.onopen = (event) => {
@@ -64,8 +65,17 @@ class App extends Component {
     this.connection.onmessage = (event) => {
       const serverData = JSON.parse(event.data);
       console.log('Data coming back from server to client', serverData);
-      this.setState(
-        { messages: [... this.state.messages, serverData] })
+      switch (serverData.type) {
+        case "usersOnline":
+          this.setState({ usersOnline: serverData.data })
+          break;
+        case "postMessage":
+          this.setState({ messages: [... this.state.messages, serverData] })
+          break;
+        case "postNotification":
+          this.setState({ messages: [... this.state.messages, serverData]})
+          break;
+      }
     }
   }
 
@@ -76,8 +86,9 @@ class App extends Component {
         <body>
           <div className="navbar">
             <a href="/" className="navbar-brand">Chatty</a>
+            <span className=".navbar-counter">{this.state.usersOnline} users online</span>
           </div>
-          <MessageList messages={this.state.messages} />
+          <MessageList currentUser={this.state.currentUser} messages={this.state.messages} />
           <ChatBar currentUser={this.state.currentUser} InsertMessage={this.handleInsertMessage} userUpdate= {this.handleUserUpdate} />
         </body>
     )}

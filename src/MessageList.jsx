@@ -4,14 +4,13 @@ import Message from './Message.jsx';
 
 export default class MessageList extends Component {
   render() {
-    console.log('this MessageList', this.props)
-    const createMessage = this.props.messages.map((logObject, index) => {
-      if (logObject.type === "postMessage") {
-        return (<Message key={logObject.id} username={logObject.username} content={logObject.content}/>);
-      } else if (logObject.type === "postNotification" && logObject.oldName !== logObject.newName) {
-        return (<div key={logObject.id} className="message system">User {logObject.oldName} changed their name to {logObject.newName}</div>);
+    const createMessage = this.props.messages.map((log) => {
+      if (log.type === "postMessage") {
+        return (<Message classname="message-message" key={log.id} username={log.username} content={log.content}/>);
+      } else if (log.type === "postNotification" && log.oldName !== log.newName) {
+        return (<div key={log.id} className="message-notification">User {log.oldName} changed their name to {log.newName}</div>);
       }
-     //   return <Message username={logObject.username} content={logObject.content} key={index} />
+     //   return <Message username={log.username} content={log.content} key={index} />
     })
 
     return (
