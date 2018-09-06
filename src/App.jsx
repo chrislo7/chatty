@@ -16,7 +16,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUser: "",
+      currentUser: "anon",
       messages: []
     };
   }
@@ -36,11 +36,24 @@ class App extends Component {
 
   handleInsertMessage = (userMessage) => {
     let messageLength = data.messages.length += 1;
-    const newMessage = {username: userMessage.username, content: userMessage.content};
+    const newMessage = {
+      type: "postMessage",
+      username: userMessage.username,
+      content: userMessage.content};
     const messagesWithUserMessage = [... this.state.messages, (newMessage)];
     this.sendMessage(newMessage)
   }
 
+
+  handleUserUpdate = (username) => {
+    const newUserName = {
+      type: "postNotification",
+      oldName: this.state.currentUser,
+      newName: username
+    }
+    this.connection.send(JSON.stringify(newUserName))
+    this.setState({currentUser: username})
+  }
 
   componentDidMount() {
     this.connection = new WebSocket("ws://localhost:3001")
@@ -65,7 +78,7 @@ class App extends Component {
             <a href="/" className="navbar-brand">Chatty</a>
           </div>
           <MessageList messages={this.state.messages} />
-          <ChatBar currentUser={this.state.currentUser} InsertMessage={this.handleInsertMessage} />
+          <ChatBar currentUser={this.state.currentUser} InsertMessage={this.handleInsertMessage} userUpdate= {this.handleUserUpdate} />
         </body>
     )}
 }

@@ -25,8 +25,10 @@ wss.on('connection', (client) => {
 client.on('message', (raw) => {
   const receivedMessage = JSON.parse(raw);
   console.log(receivedMessage)
+
   receivedMessage.id = uuidV4();
   console.log("receivedMessage with id", receivedMessage)
+
   wss.clients.forEach(function each(client) {
     if (client.readyState === WebSockets.OPEN) {
       client.send(JSON.stringify(receivedMessage));
