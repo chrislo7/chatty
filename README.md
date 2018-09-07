@@ -6,7 +6,7 @@ Built with React Boilerplate, follow instructions below when installing.
 
 ### Description
 
-Chatty is small app that allows multiple users to conenct and chat.
+Chatty is small app that allows multiple users to connect and chat.
 
 ### Instructions
 
