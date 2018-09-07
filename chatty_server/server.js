@@ -17,7 +17,7 @@ const wss = new SocketServer({ server });
 //users online (starts at 0)
 let userCount = 0;
 
-
+//function to increment usercount when person logs in
 incrementUser = () => {
   userCount++;
   let newOnlineCount = {
@@ -33,6 +33,7 @@ incrementUser = () => {
   })
 }
 
+// function to decrement usercount when person logs in
 decrementUser = () => {
   userCount--;
   let newOnlineCount = {

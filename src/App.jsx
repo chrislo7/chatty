@@ -44,7 +44,6 @@ class App extends Component {
     this.sendMessage(newMessage)
   }
 
-
   handleUserUpdate = (username) => {
     const newUserName = {
       type: "postNotification",
@@ -55,13 +54,12 @@ class App extends Component {
     this.setState({currentUser: username})
   }
 
-
   componentDidMount() {
     this.connection = new WebSocket("ws://localhost:3001")
     this.connection.onopen = (event) => {
       console.log("Connection established");
     }
-
+// checks type of data: online users, messages or notifications
     this.connection.onmessage = (event) => {
       const serverData = JSON.parse(event.data);
       console.log('Data coming back from server to client', serverData);
@@ -81,7 +79,6 @@ class App extends Component {
 
 
   render() {
-
       return (
         <body>
           <div className="navbar">

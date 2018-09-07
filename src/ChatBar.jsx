@@ -29,13 +29,13 @@ export default class ChatBar extends Component {
   handleContentChange = (event) => {
     this.setState({content: event.target.value});
   }
+
   handleContentSubmit = (event) => {
     if (event.key === "Enter" && event.target.value) {
       this.props.InsertMessage(this.state)
       this.setState({content: ''})
     }
   }
-
 
   render() {
     return (

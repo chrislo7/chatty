@@ -10,7 +10,6 @@ export default class MessageList extends Component {
       } else if (log.type === "postNotification" && log.oldName !== log.newName) {
         return (<div key={log.id} className="message-notification">User {log.oldName} changed their name to {log.newName}</div>);
       }
-     //   return <Message username={log.username} content={log.content} key={index} />
     })
 
     return (
